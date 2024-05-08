@@ -24,7 +24,7 @@
         
         
 
-        <a href="#" class="custom-button">
+        <a href="/add-question" class="custom-button">
             <div class="plus-symbol">+</div>
         </a>
 

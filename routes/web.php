@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProgrammingLanguageController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,4 @@ Route::get('/select-language/{userId}', [ProgrammingLanguageController::class, '
 Route::post('/select-language/{userId}', [ProgrammingLanguageController::class, 'selectLanguage'])->name('select-language');
 
 Route::get('/', [HomeController::class, 'view'])->name('home');
+Route::get('/add-question', [UserPostController::class, 'view'])->name('add-question');
