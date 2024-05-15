@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('programming_language_id');
             $table->foreignId('post_id')->nullable();
-            $table->string('post_content');
+            $table->string('post_content', 10000);
+            $table->string('status');
             $table->timestamps();
         });
     }

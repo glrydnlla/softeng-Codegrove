@@ -30,7 +30,9 @@ class RegisterController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'dob' => $request->dob
+            'dob' => $request->dob,
+            'display_picture_path' => 'gg--profile.png',
+            'role' => 'user'
         ]);
         
         $userId = $user->id;

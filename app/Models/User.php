@@ -22,7 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'dob',
-        'display_picture_path'
+        'display_picture_path',
+        'role'
     ];
 
     /**

@@ -11,8 +11,8 @@
                     <div class="d-flex justify-content-center align-items-center">
                         @foreach ($languages as $lang)
                             <div class="col-md-4" style="width: 10vw; margin: 20px">
-                                <input type="checkbox" class="custom-checkbox" id="card1" name="selected_languages[]" value="{{$lang->id}}">
-                                <label class="card" for="card1">
+                                <input type="checkbox" class="custom-checkbox" id="card{{$lang->id}}" name="selected_languages[]" value={{$lang->id}}>
+                                <label class="card" for="card{{$lang->id}}">
                                     <img src="{{$lang->programming_language_image_path}}" class="card-img-top" alt="Image 1">
                                     <div class="card-body">
                                         <h5 class="card-title">{{$lang->programming_language_name}}</h5>

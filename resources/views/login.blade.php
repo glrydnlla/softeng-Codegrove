@@ -15,7 +15,7 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h4 class="text-center mb-3">Log in to Codegrove</h4>
-                        <form action="register" method="post">
+                        <form action="login" method="post">
                             @csrf
                             <div class="mb-3">
                                 <label for="creds-input" class="form-label fs-6">Email or Username</label>

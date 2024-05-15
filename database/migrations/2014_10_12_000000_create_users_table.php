@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('password');
             $table->date('dob');
+            $table->string('role');
             $table->string('display_picture_path')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

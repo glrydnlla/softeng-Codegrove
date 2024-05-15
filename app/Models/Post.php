@@ -14,6 +14,7 @@ class Post extends Model
         'programming_language_id',
         'post_id',
         'post_content',
+        'status'
     ];
 
     public function replies()
