@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             ['username' => 'test', 'email' => 'test@gmail.com', 'password' => bcrypt('Test123!'), 'dob' => '2002-02-22', 'role' => 'user', 'display_picture_path' => 'gg--profile.png', 'created_at' => Carbon::now()->subSeconds(190)],
             ['username' => 'glory', 'email' => 'glory@gmail.com', 'password' => bcrypt('Glory123!'), 'dob' => '2002-02-22', 'role' => 'user', 'display_picture_path' => 'gg--profile.png', 'created_at' => Carbon::now()->subSeconds(190)],
+            ['username' => 'admin', 'email' => 'admin@gmail.com', 'password' => bcrypt('Admin123!'), 'dob' => '2002-02-22', 'role' => 'admin', 'display_picture_path' => 'gg--profile.png', 'created_at' => Carbon::now()->subSeconds(190)],
         ]);
 
         DB::table('posts')->insert([
