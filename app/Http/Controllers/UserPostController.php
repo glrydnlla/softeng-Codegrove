@@ -88,7 +88,9 @@ class UserPostController extends Controller
             'user_id' => Auth::user()->id,
             'programming_language_id' => $request->programming_language_id,
             'post_id' => $request->post_id,
-            'post_content' => $request->reply
+            'post_content' => $request->reply,
+            'status' => 'active',
+            'created_at' => Carbon::now()
         ]);
 
         $postId = $post->post_id;

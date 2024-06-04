@@ -61,7 +61,7 @@
                 </div>
             </div>
             @foreach ($replies as $reply)
-                <div class="card border border-secondary" style="margin-left: 50px; margin-top: 40px">
+                <div class="card border border-secondary" style="margin-left: 5%; margin-top: 40px; width:95%">
                     <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center" style="margin-top: 10px">
                             <img src="{{ asset('storage/images/'.$reply->user->display_picture_path) }}" class="rounded-circle" width="40" height="40" alt="User Image">
