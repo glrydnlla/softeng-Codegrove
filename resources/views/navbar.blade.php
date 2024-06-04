@@ -3,15 +3,28 @@
         <a class="navbar-brand" href="/">
             Codegrove
         </a>
-        <form class="d-flex" role="search" action="search" method="post">
-            @csrf
-            @if (isset($search))
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" value="{{$search}}">
-            @else
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-            @endif
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        @if (@isset($sourceUrl))
+            <form class="d-flex" role="search" action="{{$sourceUrl}}/search" method="post">
+                @csrf
+                @if (isset($search))
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" value="{{$search}}">
+                @else
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                @endif
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        @else
+            <form class="d-flex" role="search" action="search" method="post">
+                @csrf
+                @if (isset($search))
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" value="{{$search}}">
+                @else
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                @endif
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        @endif
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,14 +37,19 @@
                         <a class="nav-link" aria-current="page" href="/my-questions" style="margin-left: 20px">My Questions</a>
                     </li>
                     <li class="nav-item d-lg-none">
-                        <a class="nav-link" aria-current="page" href="/archived-questions" style="margin-left: 20px">Archived Questions</a>
+                        <a class="nav-link d-flex" aria-current="page" href="/archived-questions" style="margin-left: 20px">
+                            Archived Questions
+                            <div class="d-flex justify-content-center align-items-center bg-danger text-white rounded" style="height: max-content; width: max-content; font-size: 10px; padding-left: 5px; padding-right: 5px; margin-left: 5px;">
+                                {{$archiveCount}}
+                            </div>
+                        </a>
                     </li>
                 @endif
                 <li class="nav-item d-lg-none">
                     <a class="nav-link" aria-current="page" href="/profile" style="margin-left: 20px">Profile</a>
                 </li>
                 <li class="nav-item d-lg-none">
-                    <form action="logout" method="post" id="logout-form1">
+                    <form action="/logout" method="post" id="logout-form1">
                         @csrf
                         <button type="submit" class="btn nav-link" style="margin-left: 20px">Log Out</button>
                     </form>
@@ -52,11 +70,16 @@
                         <a class="nav-link" aria-current="page" href="/my-questions">My Questions</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" aria-current="page" href="/archived-questions">Archived Questions</a>
+                        <a class="nav-link d-flex" aria-current="page" href="/archived-questions">
+                            Archived Questions
+                            <div class="d-flex justify-content-center align-items-center bg-danger text-white rounded" style="height: max-content; width: max-content; font-size: 10px; padding-left: 5px; padding-right: 5px; margin-left: 5px;">
+                                {{$archiveCount}}
+                            </div>
+                        </a>
                     </li>
                     @endif
                 <li class="nav-item d-none d-lg-block">
-                    <form action="logout" method="post" id="logout-form2">
+                    <form action="/logout" method="post" id="logout-form2">
                         @csrf
                         <button type="submit" class="btn nav-link">Log Out</button>
                     </form>

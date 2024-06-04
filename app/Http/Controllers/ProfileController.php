@@ -14,6 +14,13 @@ class ProfileController extends Controller
 {
     public function view()
     {
+        $archiveCount = Post::where('user_id', -1)->count();
+        if (Auth::user()) {
+            $userId = Auth::user()->id;
+            $archiveCount = Post::where('status', 'archived')
+                        ->where('user_id', $userId)
+                        ->count();
+        }
         $user = Auth::user();
         if ($user->display_picture_path) {
             $profile_picture = 'storage/images/'.$user->display_picture_path;
@@ -33,11 +40,18 @@ class ProfileController extends Controller
                         ->count();
         $totalPostLiked = UserLike::where('user_id', $user->id)->count();
         $membership = UserSubscription::where('user_id', $user->id)->first();
-        return view('profile', ['user' => $user, 'top_posts' => $topPosts, 'total_like_count' => $totalLikeCount, 'total_post_like' => $totalPostLiked, 'membership' => $membership, 'profile_picture' => $profile_picture]);
+        return view('profile', ['user' => $user, 'top_posts' => $topPosts, 'total_like_count' => $totalLikeCount, 'total_post_like' => $totalPostLiked, 'membership' => $membership, 'profile_picture' => $profile_picture, 'archiveCount' => $archiveCount]);
     }
 
     public function viewEditProfile()
     {
+        $archiveCount = Post::where('user_id', -1)->count();
+        if (Auth::user()) {
+            $userId = Auth::user()->id;
+            $archiveCount = Post::where('status', 'archived')
+                        ->where('user_id', $userId)
+                        ->count();
+        }
         $user = Auth::user();
         if ($user->display_picture_path) {
             $profile_picture = 'storage/images/'.$user->display_picture_path;
@@ -45,11 +59,12 @@ class ProfileController extends Controller
         else {
             $profile_picture = 'storage/asset/gg--profile.png';
         }
-        return view('edit_profile', ['profile_picture' => $profile_picture]);
+        return view('edit_profile', ['profile_picture' => $profile_picture, 'archiveCount' => $archiveCount]);
     }
 
     public function editProfile(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'dob' => ['required', 'date'],
         ]);

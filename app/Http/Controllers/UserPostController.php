@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\ProgrammingLanguage;
 use App\Models\UserLike;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -13,8 +14,16 @@ class UserPostController extends Controller
 {
     public function view()
     {
+        $userId = -1;
+        $archiveCount = Post::where('user_id', -1)->count();
+        if (Auth::user()) {
+            $userId = Auth::user()->id;
+            $archiveCount = Post::where('status', 'archived')
+                        ->where('user_id', $userId)
+                        ->count();
+        }
         $languages = ProgrammingLanguage::all();
-        return view('add_question', ['languages' => $languages, 'userId' => Auth::user()->id]);
+        return view('add_question', ['languages' => $languages, 'userId' => Auth::user()->id, 'archiveCount' => $archiveCount]);
     }
 
 
@@ -38,7 +47,8 @@ class UserPostController extends Controller
             'programming_language_id' => intval($request->language),
             'post_id' => null,
             'post_content' => $request->question,
-            'status' => 'active'
+            'status' => 'active',
+            'created_at' => Carbon::now()
         ]);
 
         $postId = $post->id;
@@ -47,12 +57,20 @@ class UserPostController extends Controller
     }
 
     public function detail(Request $request) {
+        $userId = -1;
+        $archiveCount = Post::where('user_id', -1)->count();
+        if (Auth::user()) {
+            $userId = Auth::user()->id;
+            $archiveCount = Post::where('status', 'archived')
+                        ->where('user_id', $userId)
+                        ->count();
+        }
         $postId = $request->route('postId');
         $post = Post::find($postId);
         $replies = Post::where('post_id', $postId)->get();
-        $userLike = UserLike::where('user_id', Auth::user()->id)->where('post_id', $postId)->exists();
+        $userLike = UserLike::where('user_id', $userId)->where('post_id', $postId)->exists();
         $likes = UserLike::where('post_id', $postId)->count();
-        return view('post_detail', ['post' => $post, 'replies' => $replies, 'userLike' => $userLike, 'likes' => $likes]);
+        return view('post_detail', ['post' => $post, 'replies' => $replies, 'userLike' => $userLike, 'likes' => $likes, 'archiveCount' => $archiveCount]);
     }
 
 
@@ -97,10 +115,18 @@ class UserPostController extends Controller
     }
 
     public function viewEditPost(Request $request) {
+        $userId = -1;
+        $archiveCount = Post::where('user_id', -1)->count();
+        if (Auth::user()) {
+            $userId = Auth::user()->id;
+            $archiveCount = Post::where('status', 'archived')
+                        ->where('user_id', $userId)
+                        ->count();
+        }
         $postId = $request->route('postId');
         $post = Post::find($postId);
         $languages = ProgrammingLanguage::all();
-        return view('edit_question', ['languages' => $languages, 'question' => $post]);
+        return view('edit_question', ['languages' => $languages, 'question' => $post, 'archiveCount' => $archiveCount]);
     }
 
     public function editPost(Request $request)
@@ -124,6 +150,7 @@ class UserPostController extends Controller
 
         $post->post_content = $request->question;
         $post->programming_language_id = $request->language;
+        $post->status = "active";
         $post->save();
 
         return redirect('/post/'.$postId);

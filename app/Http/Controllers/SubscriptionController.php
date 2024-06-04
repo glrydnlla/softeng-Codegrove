@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Subscription;
 use App\Models\UserSubscription;
 use Illuminate\Http\Request;
@@ -12,8 +13,16 @@ class SubscriptionController extends Controller
 {
     public function view()
     {
+        $userId = -1;
+        $archiveCount = Post::where('user_id', -1)->count();
+        if (Auth::user()) {
+            $userId = Auth::user()->id;
+            $archiveCount = Post::where('status', 'archived')
+                        ->where('user_id', $userId)
+                        ->count();
+        }
         $subs = Subscription::all();
-        return view('plans', ['subs' => $subs]);
+        return view('plans', ['subs' => $subs, 'archiveCount' => $archiveCount]);
     }
 
     public function subscribe(Request $request)
