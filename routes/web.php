@@ -24,8 +24,8 @@ use Illuminate\Support\Facades\Route;
 // Guest Routes
 Route::get('/register', [RegisterController::class, 'view']);
 Route::post('/register', [RegisterController::class, 'register']);
-Route::get('/login', [LoginController::class, 'view']);
-Route::post('/login', [LoginController::class, 'login']);
+Route::get('/login', [LoginController::class, 'view'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('loginAttempt');
 Route::get('/select-language/{userId}', [ProgrammingLanguageController::class, 'view'])->name('select-language-view');
 Route::post('/select-language/{userId}', [ProgrammingLanguageController::class, 'selectLanguage'])->name('select-language');
 Route::get('/', [HomeController::class, 'view'])->name('home');
