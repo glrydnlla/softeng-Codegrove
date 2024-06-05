@@ -60,4 +60,24 @@ class SubscriptionController extends Controller
                 
         return redirect('/profile');
     }
+
+    public function unsubscribe(Request $request)
+    {
+        if (!Auth::check()) {
+            return redirect()->back()->withErrors(['Login' => 'You are signed out'])->withInput();
+        }
+        
+        $userId = Auth::user()->id;
+
+        $subscription = UserSubscription::where('user_id', $userId)->first();
+
+        if ($subscription) {
+            $subscription->delete();
+        }
+        else {
+            return redirect()->back()->withErrors(['Subscription' => 'You are not subscribed to any plans yet'])->withInput();
+        }
+                
+        return redirect('/profile');
+    }
 }

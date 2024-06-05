@@ -8,6 +8,7 @@ use App\Http\Controllers\ProgrammingLanguageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserPostController;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +49,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::post('/like', [UserPostController::class, 'likePost'])->name('like-post');
     Route::get('/plans', [SubscriptionController::class, 'view']);
     Route::post('/plans', [SubscriptionController::class, 'subscribe']);
+    Route::post('/remove-membership', [SubscriptionController::class, 'unsubscribe']);
     Route::get('/edit-post/{postId}', [UserPostController::class, 'viewEditPost'])->name('view-edit-post');
     Route::post('/edit-post/{postId}', [UserPostController::class, 'editPost'])->name('edit-post');
     Route::post('/delete-post', [UserPostController::class, 'deletePost'])->name('delete-post');

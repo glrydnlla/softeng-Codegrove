@@ -73,8 +73,8 @@ class ProfileController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         else if ($request->has('new_password') && $request->new_password!="") {
-            $validator = Validator::make($request->new_password, [
-                'new_password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/']
+            $validator = Validator::make($request->all(), [
+                'new_password' => ['required', 'string', 'min:8', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/']
             ]);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();

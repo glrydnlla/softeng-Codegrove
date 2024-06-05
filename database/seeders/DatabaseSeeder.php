@@ -18,17 +18,24 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('programming_languages')->insert([
-            ['programming_language_name' => 'C', 'programming_language_image_path' => 'c.png', 'created_at' => Carbon::now()->subSeconds(200)],
-            ['programming_language_name' => 'Java', 'programming_language_image_path' => 'java.png', 'created_at' => Carbon::now()->subSeconds(200)],
-            ['programming_language_name' => 'HTML', 'programming_language_image_path' => 'html.png', 'created_at' => Carbon::now()->subSeconds(200)],
-            ['programming_language_name' => 'JavaScript', 'programming_language_image_path' => 'js.png', 'created_at' => Carbon::now()->subSeconds(200)],
-            ['programming_language_name' => 'HTML', 'programming_language_image_path' => 'html.png', 'created_at' => Carbon::now()->subSeconds(200)],
+            ['programming_language_name' => 'C', 'programming_language_image_path' => 'c.png', 'created_at' => Carbon::now()->subSeconds(2200)],
+            ['programming_language_name' => 'Java', 'programming_language_image_path' => 'java.png', 'created_at' => Carbon::now()->subSeconds(2200)],
+            ['programming_language_name' => 'HTML', 'programming_language_image_path' => 'html.png', 'created_at' => Carbon::now()->subSeconds(2200)],
+            ['programming_language_name' => 'JavaScript', 'programming_language_image_path' => 'js.png', 'created_at' => Carbon::now()->subSeconds(2200)],
+            ['programming_language_name' => 'Python', 'programming_language_image_path' => 'py.png', 'created_at' => Carbon::now()->subSeconds(2200)],
         ]);
 
         DB::table('users')->insert([
             ['username' => 'test', 'email' => 'test@gmail.com', 'password' => bcrypt('Test123!'), 'dob' => '2002-02-22', 'role' => 'user', 'display_picture_path' => 'gg--profile.png', 'created_at' => Carbon::now()->subSeconds(190)],
             ['username' => 'glory', 'email' => 'glory@gmail.com', 'password' => bcrypt('Glory123!'), 'dob' => '2002-02-22', 'role' => 'user', 'display_picture_path' => 'gg--profile.png', 'created_at' => Carbon::now()->subSeconds(190)],
             ['username' => 'admin', 'email' => 'admin@gmail.com', 'password' => bcrypt('Admin123!'), 'dob' => '2002-02-22', 'role' => 'admin', 'display_picture_path' => 'gg--profile.png', 'created_at' => Carbon::now()->subSeconds(190)],
+        ]);
+
+        DB::table('subscriptions')->insert([
+            ['subscription_name' => 'Basic', 'subscription_description' => '10 questions per week', 'subscription_price' => 10000],
+            ['subscription_name' => 'Premium', 'subscription_description' => '50 questions per week', 'subscription_price' => 40000],
+            ['subscription_name' => 'Diamond', 'subscription_description' => '100 questions per week', 'subscription_price' => 80000],
+            ['subscription_name' => 'Infinite', 'subscription_description' => 'Unlimited amount of questions', 'subscription_price' => 500000]
         ]);
 
         DB::table('posts')->insert([
@@ -52,6 +59,12 @@ class DatabaseSeeder extends Seeder
             ['user_id' => 2, 'programming_language_id' => 1, 'post_id' => 9, 'post_content' => 'Conditional statements in C, such as if, if-else, and switch, are used to control the flow of program execution based on specified conditions. The if statement executes a block of code if a condition is true, while the if-else statement allows for the execution of different blocks of code based on whether the condition is true or false. The switch statement executes different blocks of code based on the value of an expression.', 'status' => 'active', 'created_at' => Carbon::now()->subSeconds(1110)],
             ['user_id' => 2, 'programming_language_id' => 3, 'post_id' => NULL, 'post_content' => 'What is the purpose of the <div> element in HTML?', 'status' => 'active', 'created_at' => Carbon::now()->subSeconds(1109)],
             ['user_id' => 1, 'programming_language_id' => 3, 'post_id' => 19, 'post_content' => 'The <div> element is used as a container to group and style content in HTML.', 'status' => 'active', 'created_at' => Carbon::now()->subSeconds(1108)],
+            ['user_id' => 2, 'programming_language_id' => 2, 'post_id' => NULL, 'post_content' => 'How do you define a class in Java?', 'status' => 'active', 'created_at' => Carbon::now()->subSeconds(1109)],
+            ['user_id' => 1, 'programming_language_id' => 2, 'post_id' => 21, 'post_content' => 'You define a class in Java using the class keyword followed by the class name and a pair of curly braces.', 'status' => 'active', 'created_at' => Carbon::now()->subSeconds(1108)],
+            ['user_id' => 1, 'programming_language_id' => 4, 'post_id' => NULL, 'post_content' => 'How can you declare a variable in JavaScript?', 'status' => 'active', 'created_at' => Carbon::now()->subSeconds(1107)],
+            ['user_id' => 2, 'programming_language_id' => 4, 'post_id' => 23, 'post_content' => 'You can declare a variable in JavaScript using the var, let, or const keywords', 'status' => 'active', 'created_at' => Carbon::now()->subSeconds(1106)],
+            ['user_id' => 2, 'programming_language_id' => 5, 'post_id' => NULL, 'post_content' => 'How do you create a list in Python?', 'status' => 'active', 'created_at' => Carbon::now()->subSeconds(1105)],
+            ['user_id' => 1, 'programming_language_id' => 5, 'post_id' => 25, 'post_content' => 'You can create a list in Python by placing comma-separated values inside square brackets.', 'status' => 'active', 'created_at' => Carbon::now()->subSeconds(1104)],
         ]);
     }
 }

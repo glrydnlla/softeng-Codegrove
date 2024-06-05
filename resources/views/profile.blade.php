@@ -14,6 +14,7 @@
                         {{$membership->subscription->subscription_name}}
                     </div>
                     <form action="/remove-membership" method="post" class="mb-3">
+                        @csrf
                         <button class="btn btn-danger">Unsubscribe</button>
                     </form>
                 @endif
@@ -37,7 +38,7 @@
                     <div class="card border border-secondary mb-3">
                         <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center">
                             <div class="d-flex align-items-center">
-                                <img src="user-image.jpg" class="rounded-circle" width="40" height="40" alt="User Image">
+                                <img src="{{ asset('storage/images/'.$post->user->display_picture_path) }}" class="rounded-circle" width="40" height="40" alt="User Image">
                                 <span class="ms-2">{{$post->user->username}}</span>
                             </div>
                             <span class="badge bg-success">{{$post->programmingLanguage->programming_language_name}}</span>
